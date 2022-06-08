@@ -15,12 +15,10 @@ public class FacturaClienteController {
     ClienteFacturasService servicio;
 
     @RequestMapping("/lista")
-    public String lista(Model modelo) {
+    public String lista(final Model modelo) {
 
-        List<Factura> lista = new ArrayList<>();
-        lista.addAll(servicio.buscarTodas());
-        lista.addAll(servicio.buscarTodas());
-        lista.addAll(servicio.buscarTodas());
+        List<Factura> lista = servicio.buscarTodas().collectList().block();
+
 
         modelo.addAttribute("lista", lista);
         return "lista";
